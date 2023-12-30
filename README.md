@@ -10,9 +10,9 @@ have reached their destination. The goal is to find a plan to move from one conf
 another. A configuration is defined by the position of the taxis (along the sidewalks or
 double-parked) and the position of people on the sidewalks.
 
-Run with FastDownward: (if you have downward and this repo cloned in the same repo, otherwise adjust it based on your local paths) \n
+Run with FastDownward: (if you have downward and this repo cloned in the same repo, otherwise adjust it based on your local paths) \\
 ./fast-downward.py ../planning_taxi_domain/taxi_domain.pddl ../planning_taxi_domain/instances/instance1.pddl --search "astar(blind())"
 
 
-Run with FF-Metric: \n
+Run with FF-Metric: \\
 ./ff -o ../../planning_taxi_domain/taxi_domain.pddl -f ../../planning_taxi_domain/instances/instance1.pddl 
