@@ -22,13 +22,6 @@ tA tB tC - taxi
 (= (distance ts3 ts3) 0)
 (= (distance ts1 ts1) 0)
 
-(is_taxi tA)
-(is_taxi tB)
-(is_taxi tC)
-(is_taxistand ts1)
-(is_taxistand ts2)
-(is_taxistand ts3)
-
 (is_taxi_at tA ts1)
 (is_taxi_at tB ts2)
 (is_taxi_at tC ts3)
