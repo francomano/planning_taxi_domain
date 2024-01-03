@@ -25,9 +25,6 @@ ts1 ts2 ts3 - taxistand
 (is_passenger_at p_alfa ts1)
 (is_passenger_at p_beta ts1)
 (is_passenger_at p_gamma ts2)
-(is_destination p_alfa ts3)
-(is_destination p_beta ts2)
-(is_destination p_gamma ts3)
 (not (is_boarded p_alfa tA))
 (not (is_boarded p_alfa tB))
 (not (is_boarded p_alfa tC))
@@ -72,6 +69,9 @@ ts1 ts2 ts3 - taxistand
 (not (is_waiting p_alfa))
 (not (is_waiting p_beta))
 (not (is_waiting p_gamma))
+(is_passenger_at p_alfa ts3)
+(is_passenger_at p_beta ts2)
+(is_passenger_at p_gamma ts3)
 
 ))
 

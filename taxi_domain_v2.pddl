@@ -116,7 +116,6 @@
                   (when (and (is_boarded ?person ?t))
                   (and (not (is_boarded ?person ?t))
                               (is_passenger_at ?person ?loc)
-                              (not (is_waiting ?person))
                               ))
   )
   

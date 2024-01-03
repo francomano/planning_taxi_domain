@@ -14,7 +14,6 @@
     (is_double_parked ?t - taxi)
     (is_waiting ?p - passenger)
     (is_boarded ?p - passenger ?t - taxi)
-    (is_destination ?p - passenger ?ts - taxistand)
   )
 
 
@@ -70,23 +69,6 @@
                     (is_double_parked tA)
               )
                
-
-
-               (when (is_boarded p_alfa tA)
-                     (and (is_passenger_at p_alfa ?to)
-                          (not (is_passenger_at p_alfa ?from))
-	                )
-		     )
-               (when (is_boarded p_beta tA)
-                     (and (is_passenger_at p_beta ?to)
-                          (not (is_passenger_at p_beta ?from))
-	                )
-		     )
-               (when (is_boarded p_gamma tA)
-                     (and (is_passenger_at p_gamma ?to)
-                          (not (is_passenger_at p_gamma ?from))
-	                )
-		     )
               
             (increase (total-cost) (distance ?from ?to))
 
@@ -141,23 +123,6 @@
                     (is_double_parked tB)
               )
                
-
-
-               (when (is_boarded p_alfa tB)
-                     (and (is_passenger_at p_alfa ?to)
-                          (not (is_passenger_at p_alfa ?from))
-	                )
-		     )
-               (when (is_boarded p_beta tB)
-                     (and (is_passenger_at p_beta ?to)
-                          (not (is_passenger_at p_beta ?from))
-	                )
-		     )
-               (when (is_boarded p_gamma tB)
-                     (and (is_passenger_at p_gamma ?to)
-                          (not (is_passenger_at p_gamma ?from))
-	                )
-		     )
               
             (increase (total-cost) (distance ?from ?to))
 
@@ -213,22 +178,6 @@
               )
                
 
-
-               (when (is_boarded p_alfa tC)
-                     (and (is_passenger_at p_alfa ?to)
-                          (not (is_passenger_at p_alfa ?from))
-	                )
-		     )
-               (when (is_boarded p_beta tC)
-                     (and (is_passenger_at p_beta ?to)
-                          (not (is_passenger_at p_beta ?from))
-	                )
-		     )
-               (when (is_boarded p_gamma tC)
-                     (and (is_passenger_at p_gamma ?to)
-                          (not (is_passenger_at p_gamma ?from))
-	                )
-		     )
               
             (increase (total-cost) (distance ?from ?to))
 
@@ -297,22 +246,6 @@
                     (is_double_parked tA)
               )
 
-
-              (when (is_boarded p_alfa tA)
-                     (and (is_passenger_at p_alfa ?to)
-                          (not (is_passenger_at p_alfa ?from))
-	                )
-		     )
-               (when (is_boarded p_beta tA)
-                     (and (is_passenger_at p_beta ?to)
-                          (not (is_passenger_at p_beta ?from))
-	                )
-		     )
-               (when (is_boarded p_gamma tA)
-                     (and (is_passenger_at p_gamma ?to)
-                          (not (is_passenger_at p_gamma ?from))
-	                )
-		     )
             (increase (total-cost) (distance ?from ?to))
 
             )
@@ -379,22 +312,6 @@
                     (is_double_parked tB)
               )
 
-
-              (when (is_boarded p_alfa tB)
-                     (and (is_passenger_at p_alfa ?to)
-                          (not (is_passenger_at p_alfa ?from))
-	                )
-		     )
-               (when (is_boarded p_beta tB)
-                     (and (is_passenger_at p_beta ?to)
-                          (not (is_passenger_at p_beta ?from))
-	                )
-		     )
-               (when (is_boarded p_gamma tB)
-                     (and (is_passenger_at p_gamma ?to)
-                          (not (is_passenger_at p_gamma ?from))
-	                )
-		     )
             (increase (total-cost) (distance ?from ?to))
 
             )
@@ -461,26 +378,9 @@
                     (is_double_parked tC)
               )
 
-
-              (when (is_boarded p_alfa tC)
-                     (and (is_passenger_at p_alfa ?to)
-                          (not (is_passenger_at p_alfa ?from))
-	                )
-		     )
-               (when (is_boarded p_beta tC)
-                     (and (is_passenger_at p_beta ?to)
-                          (not (is_passenger_at p_beta ?from))
-	                )
-		     )
-               (when (is_boarded p_gamma tC)
-                     (and (is_passenger_at p_gamma ?to)
-                          (not (is_passenger_at p_gamma ?from))
-	                )
-		     )
             (increase (total-cost) (distance ?from ?to))
 
             )
-
   )
 
 
@@ -563,17 +463,14 @@
                   (is_taxi_at ?t ?loc)
                   (is_along_sidewalk ?t)
                   (not (is_double_parked ?t))
-                  (and (is_passenger_at p_alfa ?loc)
-                       (is_destination p_alfa ?loc)
-                       (is_boarded p_alfa ?t)
-                  )
+                  (is_boarded p_alfa ?t)
+                  
                   
                   )
     
     :effect 
                      (and (not (is_boarded p_alfa ?t))
                           (is_passenger_at p_alfa ?loc)
-                          (not (is_waiting p_alfa))
                      )
  
     
@@ -586,10 +483,8 @@
                   (is_taxi_at ?t ?loc)
                   (is_along_sidewalk ?t)
                   (not (is_double_parked ?t))
-                  (and (is_passenger_at p_beta ?loc)
-                       (is_destination p_beta ?loc)
-                       (is_boarded p_beta ?t)
-                  )
+                  (is_boarded p_beta ?t)
+                  
                   
                   )
     
@@ -597,7 +492,6 @@
 
                      (and (not (is_boarded p_beta ?t))
                           (is_passenger_at p_beta ?loc)
-                          (not (is_waiting p_beta))
                      )
     
     
@@ -609,17 +503,14 @@
                   (is_taxi_at ?t ?loc)
                   (is_along_sidewalk ?t)
                   (not (is_double_parked ?t))
-                  (and (is_passenger_at p_gamma ?loc)
-                       (is_destination p_gamma ?loc)
-                       (is_boarded p_gamma ?t)
-                  )
+                  (is_boarded p_gamma ?t)
+                  
                   
                   )
     
     :effect 
                      (and (not (is_boarded p_gamma ?t))
                           (is_passenger_at p_gamma ?loc)
-                          (not (is_waiting p_gamma))
                      )
 
     
