@@ -22,52 +22,23 @@
     (total-cost)  
   )
 
-  (:action move_from_double_parked_tA                             ;;this is the action for moving tA starting from a double-parked position 
+  (:action move_tA_from_double_parked_to_sidewalk                             ;;this is the action for moving tA starting from a double-parked position 
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tA ?from)
                    (is_double_parked tA)                  ;;not exists P becomes forall not P and forall is expressed with constants
-
-                    (not 
-                                (and (is_double_parked tB)   ;;one of them must be false
-                                     (is_taxi_at tB ?to)
-                                )
-                         
-                    )
-                    (not 
-                                (and (is_double_parked tC)
-                                     (is_taxi_at tC ?to)
-                                )
-                         
-                    )               
+                    (not (is_taxi_at tB ?to))        ;;not exist <-> forall not
+                    (not (is_taxi_at tC ?to))
+                                
                   )                                           
     :effect (and
              (not (is_taxi_at tA ?from))
              (is_taxi_at tA ?to)
 
-
-             (when (and (not (is_taxi_at tB ?to))        ;;not exist <-> forall not
-                        (not (is_taxi_at tC ?to))
-                    )
-		         
-               	   (and (is_along_sidewalk tA)
-                   	   (not (is_double_parked tA))
-               	   )
-              )
-              (when 
-                    (and (is_taxi_at tB ?to)
-                         (is_along_sidewalk tB)
-                    )
-
-                    (is_double_parked tA)
-              )
-              (when 
-                    (and (is_taxi_at tC ?to)
-                         (is_along_sidewalk tC)
-                    )
-
-                    (is_double_parked tA)
-              )
+             (is_along_sidewalk tA)
+             (not (is_double_parked tA))
+               	   
+    
                
               
             (increase (total-cost) (distance ?from ?to))
@@ -76,110 +47,43 @@
 
   )
 
-(:action move_from_double_parked_tB                             ;;this is the action for moving tB starting from a double-parked position 
+
+  (:action move_tA_from_double_parked_along_tB                             ;;this is the action for moving tA starting from a double-parked position 
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
-                   (is_taxi_at tB ?from)
-                   (is_double_parked tB)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                   (is_taxi_at tA ?from)
+                   (is_double_parked tA)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                    (not (is_taxi_at tC ?to))
+                    (is_taxi_at tB ?to)
+                    (is_along_sidewalk tB)            
+                  ) 
 
-                    (not 
-                                (and (is_double_parked tA)   ;;one of them must be false
-                                     (is_taxi_at tA ?to)
-                                )
-                         
-                    )
-                    (not 
-                                (and (is_double_parked tC)
-                                     (is_taxi_at tC ?to)
-                                )
-                         
-                    )               
-                  )                                           
+
     :effect (and
-             (not (is_taxi_at tB ?from))
-             (is_taxi_at tB ?to)
+             (not (is_taxi_at tA ?from))
+             (is_taxi_at tA ?to)
 
-
-             (when (and (not (is_taxi_at tA ?to))        ;;not exist <-> forall not
-                        (not (is_taxi_at tC ?to))
-                    )
-		         
-               	   (and (is_along_sidewalk tB)
-                   	   (not (is_double_parked tB))
-               	   )
-              )
-              (when 
-                    (and (is_taxi_at tA ?to)
-                         (is_along_sidewalk tA)
-                    )
-
-                    (is_double_parked tB)
-              )
-              (when 
-                    (and (is_taxi_at tC ?to)
-                         (is_along_sidewalk tC)
-                    )
-
-                    (is_double_parked tB)
-              )
-               
-              
-            (increase (total-cost) (distance ?from ?to))
+             (increase (total-cost) (distance ?from ?to))
 
             )
 
   )
 
-  (:action move_from_double_parked_tC                             ;;this is the action for moving tC starting from a double-parked position 
+(:action move_tA_from_double_parked_along_tC                           ;;this is the action for moving tA starting from a double-parked position 
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
-                   (is_taxi_at tC ?from)
-                   (is_double_parked tC)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                   (is_taxi_at tA ?from)
+                   (is_double_parked tA)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                    (is_taxi_at tC ?to)
+                    (not (is_taxi_at tB ?to))
+                    (is_along_sidewalk tC)           
+                  ) 
 
-                    (not 
-                                (and (is_double_parked tA)   ;;one of them must be false
-                                     (is_taxi_at tA ?to)
-                                )
-                         
-                    )
-                    (not 
-                                (and (is_double_parked tB)
-                                     (is_taxi_at tB ?to)
-                                )
-                         
-                    )               
-                  )                                           
+
     :effect (and
-             (not (is_taxi_at tC ?from))
-             (is_taxi_at tC ?to)
-
-
-             (when (and (not (is_taxi_at tA ?to))        ;;not exist <-> forall not
-                        (not (is_taxi_at tB ?to))
-                    )
-		         
-               	   (and (is_along_sidewalk tC)
-                   	   (not (is_double_parked tC))
-               	   )
-              )
-              (when 
-                    (and (is_taxi_at tA ?to)
-                         (is_along_sidewalk tA)
-                    )
-
-                    (is_double_parked tC)
-              )
-              (when 
-                    (and (is_taxi_at tB ?to)
-                         (is_along_sidewalk tB)
-                    )
-
-                    (is_double_parked tC)
-              )
-               
-
-              
-            (increase (total-cost) (distance ?from ?to))
+             (not (is_taxi_at tA ?from))
+             (is_taxi_at tA ?to) 
+             (increase (total-cost) (distance ?from ?to))
 
             )
 
@@ -188,13 +92,13 @@
 
 
 
-  (:action move_from_sidewalk_tA
+  (:action move_tA_from_sidewalk_to_sidewalk
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                     (is_taxi_at tA ?from)
                     (is_along_sidewalk tA)
                     (not 
-                                (and (is_double_parked tB)   ;;one of them must be false
+                                (and (is_double_parked tB)   
                                      (is_taxi_at tB ?from)
                                 )
                          
@@ -206,16 +110,47 @@
                          
                     )               
                     (not 
-                                (and (is_double_parked tB)   ;;one of them must be false
-                                     (is_taxi_at tB ?to)
+                          (is_taxi_at tB ?to)
+                                
+                         
+                    )
+                    (not 
+                          (is_taxi_at tC ?to)
+                    )               
+                                      
+                  )                                           
+    :effect (and
+             (not (is_taxi_at tA ?from))
+             (is_taxi_at tA ?to)
+              
+
+            (increase (total-cost) (distance ?from ?to))
+
+            )
+
+  )
+
+  (:action move_tA_from_sidewalk_along_tB
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                    (is_taxi_at tA ?from)
+                    (is_along_sidewalk tA)
+                    (not 
+                                (and (is_double_parked tB)   
+                                     (is_taxi_at tB ?from)
                                 )
                          
                     )
                     (not 
                                 (and (is_double_parked tC)
-                                     (is_taxi_at tC ?to)
-                                )
+                                     (is_taxi_at tC ?from)
+                                ) 
                          
+                    )  
+                    (is_taxi_at tB ?to)
+                    (is_along_sidewalk tB)             
+                    (not 
+                          (is_taxi_at tC ?to)
                     )               
                                       
                   )                                           
@@ -223,28 +158,47 @@
              (not (is_taxi_at tA ?from))
              (is_taxi_at tA ?to)
 
-             (when (and (not (is_taxi_at tB ?to))        ;;not exist <-> forall not
-                        (not (is_taxi_at tC ?to))
-                    )
-		         
-               	   (and (is_along_sidewalk tA)
-                   	   (not (is_double_parked tA))
-               	   )
-              )
-              (when 
-                    (and (is_taxi_at tB ?to)
-                         (is_along_sidewalk tB)
-                    )
+             (is_double_parked tA)
+             (not (is_along_sidewalk tA))
+              
 
-                    (is_double_parked tA)
-              )
-              (when 
-                    (and (is_taxi_at tC ?to)
-                         (is_along_sidewalk tC)
-                    )
+            (increase (total-cost) (distance ?from ?to))
 
-                    (is_double_parked tA)
-              )
+            )
+
+  )
+
+  (:action move_tA_from_sidewalk_along_tC
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                    (is_taxi_at tA ?from)
+                    (is_along_sidewalk tA)
+                    (not 
+                                (and (is_double_parked tB)   
+                                     (is_taxi_at tB ?from)
+                                )
+                         
+                    )
+                    (not 
+                                (and (is_double_parked tC)
+                                     (is_taxi_at tC ?from)
+                                ) 
+                         
+                    )  
+                    (is_taxi_at tC ?to)
+                    (is_along_sidewalk tC)             
+                    (not 
+                          (is_taxi_at tB ?to)
+                    )               
+                                      
+                  )                                           
+    :effect (and
+             (not (is_taxi_at tA ?from))
+             (is_taxi_at tA ?to)
+
+             (is_double_parked tA)
+             (not (is_along_sidewalk tA))
+              
 
             (increase (total-cost) (distance ?from ?to))
 
@@ -253,13 +207,78 @@
   )
 
 
-  (:action move_from_sidewalk_tB
+
+(:action move_tB_from_double_parked_to_sidewalk                             ;;this is the action for moving tB starting from a double-parked position 
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                   (is_taxi_at tB ?from)
+                   (is_double_parked tB)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                    (not (is_taxi_at tA ?to))        ;;not exist <-> forall not
+                    (not (is_taxi_at tC ?to))
+                                  
+                  )                                           
+    :effect (and
+             (not (is_taxi_at tB ?from))
+             (is_taxi_at tB ?to)
+
+             (is_along_sidewalk tB)
+             (not (is_double_parked tB))
+               
+              
+            (increase (total-cost) (distance ?from ?to))
+
+            )
+  )
+
+(:action move_tB_from_double_parked_along_tA                            ;;this is the action for moving tA starting from a double-parked position 
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                   (is_taxi_at tB ?from)
+                   (is_double_parked tB)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                    (not (is_taxi_at tC ?to))
+                    (is_taxi_at tA ?to)
+                    (is_along_sidewalk tA)           
+                  ) 
+
+
+    :effect (and
+             (not (is_taxi_at tB ?from))
+             (is_taxi_at tB ?to)
+
+             (increase (total-cost) (distance ?from ?to))
+
+            )
+  )
+  
+  (:action move_tB_from_double_parked_along_tC                          ;;this is the action for moving tA starting from a double-parked position 
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                   (is_taxi_at tB ?from)
+                   (is_double_parked tB)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                    (not (is_taxi_at tA ?to))
+                    (is_taxi_at tC ?to)
+                    (is_along_sidewalk tC)           
+                  ) 
+
+
+    :effect (and
+             (not (is_taxi_at tB ?from))
+             (is_taxi_at tB ?to)
+
+             (increase (total-cost) (distance ?from ?to))
+
+            )
+  )
+
+
+
+(:action move_tB_from_sidewalk_to_sidewalk
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                     (is_taxi_at tB ?from)
                     (is_along_sidewalk tB)
                     (not 
-                                (and (is_double_parked tA)   ;;one of them must be false
+                                (and (is_double_parked tA)   
                                      (is_taxi_at tA ?from)
                                 )
                          
@@ -271,46 +290,19 @@
                          
                     )               
                     (not 
-                                (and (is_double_parked tA)   ;;one of them must be false
-                                     (is_taxi_at tA ?to)
-                                )
+                          (is_taxi_at tA ?to)
+                                
                          
                     )
                     (not 
-                                (and (is_double_parked tC)
-                                     (is_taxi_at tC ?to)
-                                )
-                         
+                          (is_taxi_at tC ?to)
                     )               
                                       
                   )                                           
     :effect (and
              (not (is_taxi_at tB ?from))
              (is_taxi_at tB ?to)
-
-
-             (when (and (not (is_taxi_at tA ?to))        ;;not exist <-> forall not
-                        (not (is_taxi_at tC ?to))
-                    )
-		         
-               	   (and (is_along_sidewalk tB)
-                   	   (not (is_double_parked tB))
-               	   )
-              )
-              (when 
-                    (and (is_taxi_at tA ?to)
-                         (is_along_sidewalk tA)
-                    )
-
-                    (is_double_parked tB)
-              )
-              (when 
-                    (and (is_taxi_at tC ?to)
-                         (is_along_sidewalk tC)
-                    )
-
-                    (is_double_parked tB)
-              )
+              
 
             (increase (total-cost) (distance ?from ?to))
 
@@ -319,13 +311,155 @@
   )
 
 
-  (:action move_from_sidewalk_tC
+
+  (:action move_tB_from_sidewalk_along_tA
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                    (is_taxi_at tB ?from)
+                    (is_along_sidewalk tB)
+                    (not 
+                                (and (is_double_parked tA)   
+                                     (is_taxi_at tA ?from)
+                                )
+                         
+                    )
+                    (not 
+                                (and (is_double_parked tC)
+                                     (is_taxi_at tC ?from)
+                                ) 
+                         
+                    )  
+                    (is_taxi_at tA ?to)
+                    (is_along_sidewalk tA)             
+                    (not 
+                          (is_taxi_at tC ?to)
+                    )               
+                                      
+                  )                                           
+    :effect (and
+             (not (is_taxi_at tB ?from))
+             (is_taxi_at tB ?to)
+
+             (is_double_parked tB)
+             (not (is_along_sidewalk tB))
+              
+
+            (increase (total-cost) (distance ?from ?to))
+
+            )
+
+  )
+
+  (:action move_tB_from_sidewalk_along_tC
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                    (is_taxi_at tB ?from)
+                    (is_along_sidewalk tB)
+                    (not 
+                                (and (is_double_parked tA)   
+                                     (is_taxi_at tA ?from)
+                                )
+                         
+                    )
+                    (not 
+                                (and (is_double_parked tC)
+                                     (is_taxi_at tC ?from)
+                                ) 
+                         
+                    )  
+                    (is_taxi_at tC ?to)
+                    (is_along_sidewalk tC)             
+                    (not 
+                          (is_taxi_at tA ?to)
+                    )               
+                                      
+                  )                                           
+    :effect (and
+             (not (is_taxi_at tB ?from))
+             (is_taxi_at tB ?to)
+
+             (is_double_parked tB)
+             (not (is_along_sidewalk tB))
+              
+
+            (increase (total-cost) (distance ?from ?to))
+
+            )
+
+  )
+
+
+
+(:action move_tC_from_double_parked_to_sidewalk                              
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                   (is_taxi_at tC ?from)
+                   (is_double_parked tC)                  
+                    (not (is_taxi_at tA ?to))        
+                    (not (is_taxi_at tB ?to))
+                                  
+                  )                                           
+    :effect (and
+             (not (is_taxi_at tC ?from))
+             (is_taxi_at tC ?to)
+
+             (is_along_sidewalk tC)
+             (not (is_double_parked tC))
+               
+              
+            (increase (total-cost) (distance ?from ?to))
+
+            )
+  )
+
+  (:action move_tC_from_double_parked_along_tA                             
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                   (is_taxi_at tC ?from)
+                   (is_double_parked tC)                  
+                    (not (is_taxi_at tB ?to))
+                    (is_taxi_at tA ?to)
+                    (is_along_sidewalk tA)           
+                  ) 
+
+
+    :effect (and
+             (not (is_taxi_at tC ?from))
+             (is_taxi_at tC ?to)
+
+             (increase (total-cost) (distance ?from ?to))
+
+            )
+  )
+
+  (:action move_tC_from_double_parked_along_tB                           
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                   (is_taxi_at tC ?from)
+                   (is_double_parked tC)                  
+                    (not (is_taxi_at tA ?to))
+                    (is_taxi_at tB ?to)
+                    (is_along_sidewalk tB)           
+                  ) 
+
+
+    :effect (and
+             (not (is_taxi_at tC ?from))
+             (is_taxi_at tC ?to)
+
+             (increase (total-cost) (distance ?from ?to))
+
+            )
+  )
+
+
+  (:action move_tC_from_sidewalk_to_sidewalk
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                     (is_taxi_at tC ?from)
                     (is_along_sidewalk tC)
                     (not 
-                                (and (is_double_parked tA)   ;;one of them must be false
+                                (and (is_double_parked tA)   
                                      (is_taxi_at tA ?from)
                                 )
                          
@@ -337,16 +471,47 @@
                          
                     )               
                     (not 
-                                (and (is_double_parked tA)   ;;one of them must be false
-                                     (is_taxi_at tA ?to)
+                          (is_taxi_at tA ?to)
+                                
+                         
+                    )
+                    (not 
+                          (is_taxi_at tB ?to)
+                    )               
+                                      
+                  )                                           
+    :effect (and
+             (not (is_taxi_at tC ?from))
+             (is_taxi_at tC ?to)
+              
+
+            (increase (total-cost) (distance ?from ?to))
+
+            )
+
+  )
+
+(:action move_tC_from_sidewalk_along_tA
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                    (is_taxi_at tC ?from)
+                    (is_along_sidewalk tC)
+                    (not 
+                                (and (is_double_parked tA)   
+                                     (is_taxi_at tA ?from)
                                 )
                          
                     )
                     (not 
                                 (and (is_double_parked tB)
-                                     (is_taxi_at tB ?to)
-                                )
+                                     (is_taxi_at tB ?from)
+                                ) 
                          
+                    )  
+                    (is_taxi_at tA ?to)
+                    (is_along_sidewalk tA)             
+                    (not 
+                          (is_taxi_at tB ?to)
                     )               
                                       
                   )                                           
@@ -354,36 +519,55 @@
              (not (is_taxi_at tC ?from))
              (is_taxi_at tC ?to)
 
-
-             (when (and (not (is_taxi_at tA ?to))        ;;not exist <-> forall not
-                        (not (is_taxi_at tB ?to))
-                    )
-		         
-               	   (and (is_along_sidewalk tC)
-                   	   (not (is_double_parked tC))
-               	   )
-              )
-              (when 
-                    (and (is_taxi_at tA ?to)
-                         (is_along_sidewalk tA)
-                    )
-
-                    (is_double_parked tC)
-              )
-              (when 
-                    (and (is_taxi_at tB ?to)
-                         (is_along_sidewalk tB)
-                    )
-
-                    (is_double_parked tC)
-              )
+             (is_double_parked tC)
+             (not (is_along_sidewalk tC))
+              
 
             (increase (total-cost) (distance ?from ?to))
 
             )
+
   )
 
+(:action move_tC_from_sidewalk_along_tB
+    :parameters (?from - taxistand ?to - taxistand)
+    :precondition (and
+                    (is_taxi_at tC ?from)
+                    (is_along_sidewalk tC)
+                    (not 
+                                (and (is_double_parked tA)   
+                                     (is_taxi_at tA ?from)
+                                )
+                         
+                    )
+                    (not 
+                                (and (is_double_parked tB)
+                                     (is_taxi_at tB ?from)
+                                ) 
+                         
+                    )  
+                    (is_taxi_at tB ?to)
+                    (is_along_sidewalk tB)             
+                    (not 
+                          (is_taxi_at tA ?to)
+                    )               
+                                      
+                  )                                           
+    :effect (and
+             (not (is_taxi_at tC ?from))
+             (is_taxi_at tC ?to)
 
+             (is_double_parked tC)
+             (not (is_along_sidewalk tC))
+              
+
+            (increase (total-cost) (distance ?from ?to))
+
+            )
+
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (:action load_p_alfa
   :parameters (?t - taxi ?loc - taxistand)
