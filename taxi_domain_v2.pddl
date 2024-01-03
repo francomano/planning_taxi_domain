@@ -14,7 +14,6 @@
     (is_double_parked ?t - taxi)
     (is_waiting ?p - passenger)
     (is_boarded ?p - passenger ?t - taxi)
-    (is_destination ?p - passenger ?ts - taxistand)
   )
 
 
@@ -62,13 +61,7 @@
                          (not (is_along_sidewalk ?t))
                     )
               )
-              (forall (?person - passenger)
-                (when (is_boarded ?person ?t)
-                      (and (is_passenger_at ?person ?to)
-                           (not (is_passenger_at ?person ?from))
-	              )
-		)
-              )
+              
             (increase (total-cost) (distance ?from ?to))
 
             )
@@ -110,30 +103,21 @@
   )
   
   (:action unload
-    :parameters (?t - taxi ?loc - taxistand)
+    :parameters (?t - taxi ?loc - taxistand ?person - passenger)
     :precondition (and 
                   (is_taxi_at ?t ?loc)
                   (is_along_sidewalk ?t)
                   (not (is_double_parked ?t))
-                  (exists (?person - passenger)
-                      (and (is_passenger_at ?person ?loc)
-                          (is_destination ?person ?loc)
-                          (is_boarded ?person ?t)
-                      )
-                  )
+                  (is_boarded ?person ?t)
+                  
                   )
     
     :effect 
-          (forall (?person - passenger)
-                  (when (and (is_boarded ?person ?t)
-                        (is_passenger_at ?person ?loc)
-                        (is_destination ?person ?loc))
+                  (when (and (is_boarded ?person ?t))
                   (and (not (is_boarded ?person ?t))
-                              ;;(is_passenger_at ?person ?loc)
+                              (is_passenger_at ?person ?loc)
                               (not (is_waiting ?person))
-                              )))
-    
-    
+                              ))
   )
   
   
