@@ -1,5 +1,5 @@
 (define (domain taxi)
-  (:requirements :strips :typing :action-costs :conditional-effects :negative-preconditions)
+  (:requirements :strips :typing :action-costs :negative-preconditions)
 
   (:types
     taxi taxistand passenger 
