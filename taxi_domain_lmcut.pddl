@@ -1,5 +1,5 @@
 (define (domain taxi)
-  (:requirements :strips :typing :action-costs :negative-preconditions)
+  (:requirements :strips :typing :action-costs :conditional-effects :negative-preconditions)
 
   (:types
     taxi taxistand passenger 
@@ -22,19 +22,11 @@
     (total-cost)  
   )
 
-<<<<<<< HEAD
   (:action move_tA_from_double_parked_to_sidewalk                             
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tA ?from)
                    (is_double_parked tA)                  
-=======
-  (:action move_tA_from_double_parked_to_sidewalk                            
-    :parameters (?from - taxistand ?to - taxistand)
-    :precondition (and
-                   (is_taxi_at tA ?from)
-                   (is_double_parked tA)                 
->>>>>>> 377c7dd8ef1fa3979ed6f4e9ddf7aad1af5350c5
                     (not (is_taxi_at tB ?to))        
                     (not (is_taxi_at tC ?to))
                                 
@@ -77,19 +69,11 @@
 
   )
 
-<<<<<<< HEAD
 (:action move_tA_from_double_parked_along_tC                           
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tA ?from)
                    (is_double_parked tA)                  
-=======
-(:action move_tA_from_double_parked_along_tC                       
-    :parameters (?from - taxistand ?to - taxistand)
-    :precondition (and
-                   (is_taxi_at tA ?from)
-                   (is_double_parked tA)                
->>>>>>> 377c7dd8ef1fa3979ed6f4e9ddf7aad1af5350c5
                     (is_taxi_at tC ?to)
                     (not (is_taxi_at tB ?to))
                     (is_along_sidewalk tC)           
@@ -224,19 +208,11 @@
 
 
 
-<<<<<<< HEAD
 (:action move_tB_from_double_parked_to_sidewalk                             
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tB ?from)
                    (is_double_parked tB)                  
-=======
-(:action move_tB_from_double_parked_to_sidewalk                            
-    :parameters (?from - taxistand ?to - taxistand)
-    :precondition (and
-                   (is_taxi_at tB ?from)
-                   (is_double_parked tB)                
->>>>>>> 377c7dd8ef1fa3979ed6f4e9ddf7aad1af5350c5
                     (not (is_taxi_at tA ?to))        
                     (not (is_taxi_at tC ?to))
                                   
@@ -254,11 +230,7 @@
             )
   )
 
-<<<<<<< HEAD
 (:action move_tB_from_double_parked_along_tA                             
-=======
-(:action move_tB_from_double_parked_along_tA                        
->>>>>>> 377c7dd8ef1fa3979ed6f4e9ddf7aad1af5350c5
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tB ?from)
@@ -278,19 +250,11 @@
             )
   )
   
-<<<<<<< HEAD
   (:action move_tB_from_double_parked_along_tC                           
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tB ?from)
                    (is_double_parked tB)                 
-=======
-  (:action move_tB_from_double_parked_along_tC                        
-    :parameters (?from - taxistand ?to - taxistand)
-    :precondition (and
-                   (is_taxi_at tB ?from)
-                   (is_double_parked tB)                  
->>>>>>> 377c7dd8ef1fa3979ed6f4e9ddf7aad1af5350c5
                     (not (is_taxi_at tA ?to))
                     (is_taxi_at tC ?to)
                     (is_along_sidewalk tC)           
