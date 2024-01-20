@@ -21,14 +21,8 @@ tA tB - taxi
 (is_taxi_at tB ts1)
 (is_passenger_at p_alfa ts1)
 (is_destination p_alfa ts2)
-
-(not (is_boarded p_alfa tA))
-(not (is_boarded p_alfa tB))
-
 (is_along_sidewalk tA)
 (is_double_parked tB)
-(not (is_along_sidewalk tB))
-
 (is_waiting p_alfa)
 
 )

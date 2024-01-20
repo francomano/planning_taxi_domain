@@ -22,12 +22,12 @@
     (total-cost)  
   )
 
-  (:action move_tA_from_double_parked_to_sidewalk                             ;;this is the action for moving tA starting from a double-parked position 
+  (:action move_tA_from_double_parked_to_sidewalk                             
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tA ?from)
-                   (is_double_parked tA)                  ;;not exists P becomes forall not P and forall is expressed with constants
-                    (not (is_taxi_at tB ?to))        ;;not exist <-> forall not
+                   (is_double_parked tA)                  
+                    (not (is_taxi_at tB ?to))        
                     (not (is_taxi_at tC ?to))
                                 
                   )                                           
@@ -48,11 +48,11 @@
   )
 
 
-  (:action move_tA_from_double_parked_along_tB                             ;;this is the action for moving tA starting from a double-parked position 
+  (:action move_tA_from_double_parked_along_tB                             
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tA ?from)
-                   (is_double_parked tA)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                   (is_double_parked tA)                  
                     (not (is_taxi_at tC ?to))
                     (is_taxi_at tB ?to)
                     (is_along_sidewalk tB)            
@@ -69,11 +69,11 @@
 
   )
 
-(:action move_tA_from_double_parked_along_tC                           ;;this is the action for moving tA starting from a double-parked position 
+(:action move_tA_from_double_parked_along_tC                           
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tA ?from)
-                   (is_double_parked tA)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                   (is_double_parked tA)                  
                     (is_taxi_at tC ?to)
                     (not (is_taxi_at tB ?to))
                     (is_along_sidewalk tC)           
@@ -208,12 +208,12 @@
 
 
 
-(:action move_tB_from_double_parked_to_sidewalk                             ;;this is the action for moving tB starting from a double-parked position 
+(:action move_tB_from_double_parked_to_sidewalk                             
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tB ?from)
-                   (is_double_parked tB)                  ;;not exists P becomes forall not P and forall is expressed with constants
-                    (not (is_taxi_at tA ?to))        ;;not exist <-> forall not
+                   (is_double_parked tB)                  
+                    (not (is_taxi_at tA ?to))        
                     (not (is_taxi_at tC ?to))
                                   
                   )                                           
@@ -230,11 +230,11 @@
             )
   )
 
-(:action move_tB_from_double_parked_along_tA                            ;;this is the action for moving tA starting from a double-parked position 
+(:action move_tB_from_double_parked_along_tA                             
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tB ?from)
-                   (is_double_parked tB)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                   (is_double_parked tB)                  
                     (not (is_taxi_at tC ?to))
                     (is_taxi_at tA ?to)
                     (is_along_sidewalk tA)           
@@ -250,11 +250,11 @@
             )
   )
   
-  (:action move_tB_from_double_parked_along_tC                          ;;this is the action for moving tA starting from a double-parked position 
+  (:action move_tB_from_double_parked_along_tC                           
     :parameters (?from - taxistand ?to - taxistand)
     :precondition (and
                    (is_taxi_at tB ?from)
-                   (is_double_parked tB)                  ;;not exists P becomes forall not P and forall is expressed with constants
+                   (is_double_parked tB)                 
                     (not (is_taxi_at tA ?to))
                     (is_taxi_at tC ?to)
                     (is_along_sidewalk tC)           

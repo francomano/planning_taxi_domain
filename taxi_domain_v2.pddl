@@ -1,4 +1,4 @@
-;;This is the original domain with full ADL requirements
+;;This is the second version of the domain with full ADL requirements
 
 (define (domain taxi)
   (:requirements :strips :typing :action-costs :adl)
@@ -98,8 +98,6 @@
                           )
                     )
             )
-  
-  
   )
   
   (:action unload
